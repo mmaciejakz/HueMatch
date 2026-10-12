@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HueMatch - Strona Główna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="navbar">
+        <div class="navbar_logo">HueMatch</div>
+
+        <!-- panel wyszukiwania -->
+        <button class="navbar_search" id="przyciskWyszukiwania" aria-expanded="false" aria-controls="panelWyszukiwania">
+            <span class="navbar_search-icon">🔍</span>
+            <span class="navbar_search-text">Wyszukaj palet…</span>
+        </button>
+
+        <nav class="navbar_links">
+            <a href="">Ulubione</a>
+            <a href="">Profil</a>
+            <a href="">About</a>
+        </nav>
+    </header>
+
+    <!-- Panel wyyszukiwania (domyslnie ukryty i pokazywany
+     po kliknięciu ale można dać animacje wysuwania) -->
+    
+    <section class="panel-wyszukiwania ukryty" id="panelWyszukiwania">
+        <form id="formularzFiltrow" class="panel-wyszukiwania_siatka">
+            
+            <div class="pole">
+                <label for="kolorReferencyjny">Kolor Referencyjny</label>
+                <div class="pole_kolor-wrapper">
+                    <input type="text" id="kolorReferencyjny" placeholder="#3a7bd5" maxlength="7">
+                    <input type="color" id="kolorReferencyjnyPicker" value="#3a7bd5" title="Wybierz kolor referencyjny">
+                </div>
+                <!-- tu JS wyswietli info gdy kolor bedzie nie poprawny -->
+                <span class="pole_podpowiedz" id="podpowiedzKoloru"></span>
+            </div>
+
+            <div class="pole">
+                <label for="rozmiarPalety">Rozmiar palety - <span id="etykietaRozmiaruPalety">3</span> kolorów</label>
+                <input type="range" id="rozmiarPalety" min="2" max="5" step="1" value="3">
+            </div>
+
+            <div class="pole">
+                <label>Cechy <span class="pole_podpowiedz">(możesz wybrać kilka)</span></label>
+                <div class="chip-grupa" id="grupaCech">
+                    <button type="button" class="chip" data-value="neon">Neon</button>
+                    <button type="button" class="chip" data-value="professional">Profesionalny</button>
+                    <button type="button" class="chip" data-value="chaotic">Chaotyczny</button>
+                </div>
+            </div>
+
+            <div class="pole">
+                <label>Nastrój <span class="pole_podpowiedz">(możesz wybrać kilka)</span></label>
+                <div class="chip-grupa" id="grupaNastroju">
+                    <button type="button" class="chip" data-value="clean">Clean</button>
+                    <button type="button" class="chip" data-value="calm">Spokojny</button>
+                    <button type="button" class="chip" data-value="energetic">Energiczny</button>
+                </div>
+            </div>
+
+            <div class="pole pole--przelacznik">
+                <label for="ciemnyMotyw">Ciemny motyw</label>
+                <label class="przelacznik">
+                    <input type="checkbox" id="ciemnyMotyw">
+                    <span class="przelacznik_suwak"></span> 
+                </label>
+            </div>
+
+            <div class="pole pole--przelacznik">
+                <label for="wysokiKontrast">Wysoki Kontrast</label>
+                <label class="przelacznik">
+                    <input type="checkbox" id="wysokiKontrast">
+                    <span class="przelacznik_suwak"></span> 
+                </label>
+            </div>
+
+            <div class="pole">
+                <label class="pole_etykiety-suwaka">
+                <span>Cool</span><span>Neutral</span><span>Warm</span>
+                </label>
+                <input type="range" id="temperatura" min="0" max="2" step="1" value="1">
+            </div>
+
+            <div class="pole pole--przycisk">
+                <button type="submit" class="przycisk przycisk--glowny">Zobaczmy -></button>
+            </div>
+        </form>
+    </section>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero_zdjecie">PHOTO</div>
+        <div class="hero_tekst">
+            <h1>DISCOVER<br>COLORS THAT WORK<br>TOGETHER</h1>
+            <p>Discover harmonious color palettes desifned to create the right feeling for your brand, product or interface.</p>
+            <a href="#popularne" class="przycisk przycisk--glowny">Explore palettes</a>
+        </div>
+    </section>
+
+<!-- Wyniki wyszukiwania algorytmu -->
+    <section class="sekcja-wynikow ukryty" id="sekcjaWynikow">
+        <div class="sekcja-wynikow_naglowek">
+            <h2>Search results</h2>
+            <button type="button" id="przyciskWyczyscWyniki" class="przycisk przycisk--tekstowy">Clear results</button>
+        </div>
+        <div id="kontenerOstrzezen"></div>
+        <div class="pigulki-filtrow" id="pigulkiFiltrow"></div>
+        <p class="statystyki-generowania" id="statystykiGenerowania"></p>
+        <div class="siatka-palet" id="kontenerWynikow"></div>
+    </section>
+
+    <!-- popularne teraz -->
+    <section class="sekcja-popularne" id="popularne">
+        <h2>Popular right now</h2>
+        <div class="siatka-palet" id="kontenerPopularnych"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

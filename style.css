@@ -1,0 +1,576 @@
+:root{
+    --zielony-ciemny: #0d3b26;
+    --zielony-ciemny-hover: #0a2e1d;
+    --tlo-sekcji: #e6e6e6;
+    --tlo-karty: #eeeeee;
+    --bialy: #ffffff;
+    --tekst-ciemny: #111111;
+    --tekst-szary: #555555;
+    --obwodka: #d6d6d6;
+    --promien: 16px;
+    --promien-mala: 8px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--tekst-ciemny);
+    background: var(--bialy);
+}
+
+h1,h2{
+    letter-spacing: 0.5px;
+}
+
+.ukryty{
+    display: none !important;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 18px 40px;
+    background: var(--bialy);
+    border-bottom: 1px solid var(--obwodka);
+}
+
+.navbar_logo{
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.navbar_search{
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--obwodka);
+    background: var(--tlo-sekcji);
+    color: var(--tekst-szary);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.navbar_search:hover{
+    background: #dcdcdc;
+}
+
+.navbar_links{
+    display: flex;
+    gap: 24px;
+    white-space: nowrap;
+}
+
+.navbar_links a {
+    text-decoration: none;
+    color: var(--tekst-ciemny);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.navbar_links a:hover{
+    color: var(--tekst-ciemny);
+}
+
+/* PANEL WYSZUKIWANIA */
+
+.panel-wyszukiwania{
+    background: var(--tlo-sekcji);
+    padding: 28px 40px;
+    border-bottom: 1px solid var(--obwodka);
+}
+
+.panel-wyszukiwania_siatka{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:22px 36px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pole{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pole label{
+    font-size:0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color:var(--tekst-ciemny)
+}
+
+.pole input[type="text"],
+.pole select{
+    padding: 10px 12px;
+    border-radius: var(--promien-mala);
+    border:1px solid var(--obwodka);
+    background: var(--bialy);
+    font-size: 0.9rem;
+}
+
+.pole_kolor-wrapper{
+    display: flex;
+    gap:8px;
+}
+
+.pole_kolor-wrapper input[type="text"]{
+    flex:1;
+    min-width: 0;
+}
+
+.pole_kolor-wrapper input[type="color"]{
+    width: 42px;
+    height: 40px;
+    padding: 2px;
+    border-radius: var(--promien-mala);
+    border:  1px solid var(--obwodka);
+    background: var(--bialy);
+    cursor: pointer;
+}
+
+.pole_podpowiedz{
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: none;
+    color: var(--tekst-ciemny);
+    min-height: 14px;
+}
+
+.pole_podpowiedz--blad{
+    color: #b3261e;
+}
+
+.pole input[type="range"]{
+    width: 100%;
+    accent-color:var(--zielony-ciemny);
+}
+
+.pole_etykiety-suwaka{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.pole_podpowiedz{
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: none;
+    color:var(--tekst-szary);
+    letter-spacing: normal;
+}
+
+/* chip - wybor */
+.chip-grupa{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip{
+    border: 1px solid var(--obwodka);
+    background: var(--bialy);
+    color: var(--tekst-ciemny);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.chip:hover{
+    border-color: var(--zielony-ciemny);
+}
+
+.chip.aktywny{
+    background: var(--zielony-ciemny);
+    border-color: var(--zielony-ciemny);
+    color: var(--bialy);
+}
+
+.pole--przelacznik{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pole--przycisk{
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+/* przelacznik onoff */
+
+.przelacznik{
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.przelacznik input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.przelacznik_suwak{
+    position: absolute;
+    inset: 0;
+    background: #c9c9c9;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: background 0.2s ease;
+}
+
+.przelacznik_suwak::before{
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background: var(--bialy);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.przelacznik input:checked +.przelacznik_suwak{
+    background: var(--zielony-ciemny);
+}
+
+.przelacznik input:checked +.przelacznik_suwak::before{
+    transform: translateX(20px);
+}
+
+/* przyciski */
+.przycisk{
+    display: inline-block;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 26px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.przycisk--glowny{
+    background: var(--zielony-ciemny);
+    color: var(--bialy);
+}
+
+.przycisk--glowny:hover{
+    background: var(--zielony-ciemny-hover);
+}
+
+.przycisk--tekstowy{
+    background: transparent;
+    color:var(--tekst-szary) ; 
+    text-transform: none;
+    font-weight: 600;
+    padding: 6px 10px;
+}
+
+.przycisk--tekstowy:hover{
+    color:var(--tekst-ciemny)
+}
+
+/* HERO */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 40px;
+  background: var(--tlo-sekcji);
+}
+
+.hero_zdjecie {
+  aspect-ratio: 16 / 10;
+  background: var(--zielony-ciemny);
+  border-radius: var(--promien);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bialy);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero_tekst h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.hero_tekst p {
+  color: var(--tekst-szary);
+  margin: 0 0 20px;
+  max-width: 420px;
+}
+
+/* sekcje z paletami */
+
+.sekcja-popularne,
+.sekcja-wynikow {
+  padding: 40px;
+}
+
+.sekcja-popularne h2 {
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.sekcja-wynikow_naglowek {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sekcja-wynikow_naglowek h2 {
+  margin: 0;
+}
+
+.baner-ostrzezenia {
+  background: #fff4e2;
+  border: 1px solid #f0c36d;
+  color: #7a4d00;
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+}
+
+.baner-ostrzezenia p {
+  margin: 4px 0;
+  font-size: 0.82rem;
+}
+
+/* Pigułki przypominające dokładne filtry, o jakie poprosił użytkownik */
+.pigulki-filtrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pigulka-filtra {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--tlo-karty);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pigulka-filtra_kropka {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.statystyki-generowania {
+  font-size: 0.78rem;
+  color: var(--tekst-szary);
+  margin: 0 0 18px;
+}
+
+.sekcja-wynikow_notka {
+  background: #fff4e5;
+  border: 1px solid #f0cf9a;
+  color: #7a5320;
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  border-radius: var(--promien-mala);
+  margin: 0 0 18px;
+}
+
+.siatka-palet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.karta-palety {
+  background: var(--tlo-karty);
+  border-radius: var(--promien);
+  overflow: hidden;
+}
+
+.karta-palety_kolory {
+  display: flex;
+  height: 130px;
+}
+
+.karta-palety_swatch {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+/* Etykieta z kodem HEX - kolor tekstu/tła dobierany w JS wg luminancji, */
+/* żeby zawsze był czytelny (kolorTekstuDlaTla) niezależnie od tła swatcha */
+.karta-palety_etykieta-hex {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: calc(100% - 6px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.karta-palety_etykieta-hex.jasna {
+  color: #111114;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.karta-palety_etykieta-hex.ciemna {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Plakietka "Your color" nad kolorem referencyjnym użytkownika (1. slot) */
+.karta-palety_tag-referencyjny {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #111114;
+}
+
+.karta-palety_info {
+  padding: 12px 14px 14px;
+}
+
+.karta-palety_gorna-linia {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.karta-palety_opis {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--tekst-szary);
+  text-transform: capitalize;
+}
+
+.karta-palety_dopasowanie {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--zielony-ciemny);
+  white-space: nowrap;
+}
+
+/* Rozbicie oceny na czynniki cząstkowe*/
+.karta-palety_wyniki-czastkowe {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wiersz-wyniku {
+  display: grid;
+  grid-template-columns: 56px 1fr 22px;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.66rem;
+  color: var(--tekst-szary);
+}
+
+.pasek-wyniku {
+  height: 5px;
+  border-radius: 999px;
+  background: #dcdcdc;
+  overflow: hidden;
+}
+
+.pasek-wyniku i {
+  display: block;
+  height: 100%;
+  width: var(--wynik, 0%);
+  background: var(--zielony-ciemny);
+}
+
+.komunikat-brak-wynikow {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--tekst-szary);
+  padding: 30px 0;
+}
+
+/* reponsywnosc */
+
+@media (max-width: 860px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 14px 20px;
+  }
+
+  .navbar_links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .panel-wyszukiwania {
+    padding: 20px;
+  }
+
+  .panel-wyszukiwania_siatka {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .sekcja-popularne,
+  .sekcja-wynikow {
+    padding: 24px;
+  }
+}

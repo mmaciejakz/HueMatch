@@ -807,3 +807,26 @@ function wyrenderujPopularnePalety() {
 }
 
 wyrenderujPopularnePalety();
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const linkProfilu = document.getElementById("linkProfilu");
+
+    if (!linkProfilu) return;
+
+    try {
+        const odpowiedz = await fetch("status_logowania.php");
+        if (!odpowiedz.ok) return;
+
+        const dane = await odpowiedz.json();
+
+        if (dane.zalogowany) {
+            linkProfilu.textContent = dane.nazwa || "Twój profil";
+            linkProfilu.href = "profil.php";
+        } else {
+            linkProfilu.textContent = "Profil";
+            linkProfilu.href = "logowanie.php";
+        }
+    } catch (blad) {
+        console.error("Nie udało się sprawdzić logowania:", blad);
+    }
+});

@@ -542,6 +542,93 @@ h1,h2{
   padding: 30px 0;
 }
 
+/* FORMULARZE LOGOWANIA I REJESTRACJI */
+.formularz-konto {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 30px;
+    background: var(--tlo-sekcji);
+    border-radius: var(--promien);
+}
+
+.formularz-konto h1 {
+    text-align: center;
+}
+
+.formularz-konto .pole {
+    margin-bottom: 16px;
+}
+
+.formularz-konto input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--obwodka);
+    border-radius: var(--promien-mala);
+    background: var(--bialy);
+    font-size: 1rem;
+}
+
+.formularz-konto .przycisk {
+    width: 100%;
+}
+
+.formularz-konto p {
+    text-align: center;
+}
+
+.formularz-konto a {
+    color: var(--zielony-ciemny);
+    font-weight: 600;
+}
+.powrot-glowna {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px;
+    color: var(--zielony-ciemny);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.powrot-glowna:hover {
+    text-decoration: underline;
+}
+
+/* Pola logowania z błędem */
+.formularz-konto input.pole-blad {
+    border: 1px solid #e05252;
+    background-color: #fff0f0;
+    animation: podskokBledu 0.35s ease;
+}
+
+/* Delikatny efekt podskoku */
+@keyframes podskokBledu {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-5px);
+    }
+
+    60% {
+        transform: translateY(2px);
+    }
+
+    80% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Czerwone obramowanie podczas wpisywania */
+.formularz-konto input.pole-blad:focus {
+    outline: none;
+    border-color: #c93636;
+    box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.15);
+}
+
+
 /* reponsywnosc */
 
 @media (max-width: 860px) {

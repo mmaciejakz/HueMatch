@@ -26,16 +26,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($powtorz_haslo === "") {
             $bledne_pola[] = "powtorz_haslo";
         }
+
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $komunikat = "Podaj poprawny adres e-mail.";
         $bledne_pola[] = "email";
-    } elseif (strlen($haslo) < 8) {
-        $komunikat = "Hasło musi mieć co najmniej 8 znaków.";
+
+    } elseif (strlen($haslo) < 12) {
+        $komunikat = "Hasło musi mieć co najmniej 12 znaków.";
         $bledne_pola[] = "haslo";
+
+    } elseif (strlen($haslo) > 128) {
+        $komunikat = "Hasło może mieć maksymalnie 128 znaków.";
+        $bledne_pola[] = "haslo";
+
+    } elseif (!preg_match('/[A-Z]/', $haslo)) {
+        $komunikat = "Hasło musi zawierać co najmniej jedną wielką literę (A-Z).";
+        $bledne_pola[] = "haslo";
+
+    } elseif (!preg_match('/[a-z]/', $haslo)) {
+        $komunikat = "Hasło musi zawierać co najmniej jedną małą literę (a-z).";
+        $bledne_pola[] = "haslo";
+
+    } elseif (!preg_match('/[0-9]/', $haslo)) {
+        $komunikat = "Hasło musi zawierać co najmniej jedną cyfrę.";
+        $bledne_pola[] = "haslo";
+
+    } elseif (!preg_match('/[^a-zA-Z0-9]/', $haslo)) {
+        $komunikat = "Hasło musi zawierać co najmniej jeden znak specjalny, np. ! @ # $.";
+        $bledne_pola[] = "haslo";
+
     } elseif ($haslo !== $powtorz_haslo) {
         $komunikat = "Hasła nie są takie same.";
         $bledne_pola[] = "haslo";
         $bledne_pola[] = "powtorz_haslo";
+
     } else {
         // Sprawdzenie, czy nazwa użytkownika lub e-mail są już zajęte
         $zapytanie = mysqli_prepare(
@@ -71,10 +95,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
 
                 mysqli_stmt_close($zapytanie);
+
             } else {
                 mysqli_stmt_close($zapytanie);
 
-                // Zabezpieczenie hasła przed zapisaniem do bazy
+                // Bezpieczne haszowanie hasła
                 $skrot_hasla = password_hash($haslo, PASSWORD_DEFAULT);
 
                 $zapytanie = mysqli_prepare(
@@ -168,12 +193,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     type="password"
                     id="haslo"
                     name="haslo"
-                    minlength="8"
+                    minlength="12"
+                    maxlength="128"
+                    autocomplete="new-password"
                     required
                     class="<?= in_array('haslo', $bledne_pola, true) ? 'pole-blad' : '' ?>"
                 >
                 <span class="pole_podpowiedz">
-                    Hasło musi mieć co najmniej 8 znaków.
+                    Minimum 12 znaków, wielka i mała litera,
+                    cyfra oraz znak specjalny.
                 </span>
             </div>
 
@@ -185,7 +213,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     type="password"
                     id="powtorz_haslo"
                     name="powtorz_haslo"
-                    minlength="8"
+                    minlength="12"
+                    maxlength="128"
+                    autocomplete="new-password"
                     required
                     class="<?= in_array('powtorz_haslo', $bledne_pola, true) ? 'pole-blad' : '' ?>"
                 >

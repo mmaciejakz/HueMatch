@@ -807,7 +807,7 @@ function wyrenderujPopularnePalety() {
 }
 
 wyrenderujPopularnePalety();
-
+// -14- Obsługa logowania i wyświetlanie nazwy użytkownika w menu
 document.addEventListener("DOMContentLoaded", async function () {
     const linkProfilu = document.getElementById("linkProfilu");
 
